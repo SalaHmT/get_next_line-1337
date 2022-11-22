@@ -5,26 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shamsate <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 21:14:20 by shamsate          #+#    #+#             */
-/*   Updated: 2022/11/21 21:14:59 by shamsate         ###   ########.fr       */
+/*   Created: 2022/11/22 21:07:13 by shamsate          #+#    #+#             */
+/*   Updated: 2022/11/22 21:13:30 by shamsate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
+# include <unistd.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
-# endif
-
-char	*get_next_line(int fd);
-char	*ft_read_l_str(int fd, char *left_str);
-char	*ft_strchr(char *s, int c);
-size_t	ft_strlen(char *s);
-char	*ft_strjoin_l(char *left_str, char *buff);
-char	*ft_get_line(char *left_str);
-char	*ft_new_l_str(char *left_str);
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1000
+#endif
+char			*get_next_line(int fd);
+char			*ft_strjoin(char *s1, char const *s2);
+unsigned int	ft_strlen(const char *str);
+int				ft_index(const char *s, char c);
+char			*ft_strdup(const char *s1);
 
 #endif
