@@ -5,19 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shamsate <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 21:07:40 by shamsate          #+#    #+#             */
-/*   Updated: 2022/11/22 21:15:01 by shamsate         ###   ########.fr       */
+/*   Created: 2022/11/22 21:54:52 by shamsate          #+#    #+#             */
+/*   Updated: 2022/11/22 23:12:58 by shamsate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
 
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 # include <stdlib.h>
 # include <unistd.h>
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1000
-#endif
 
 char			*get_next_line(int fd);
 char			*ft_strjoin(char *s1, char const *s2);

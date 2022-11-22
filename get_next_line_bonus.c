@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shamsate <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 21:06:59 by shamsate          #+#    #+#             */
-/*   Updated: 2022/11/22 21:13:35 by shamsate         ###   ########.fr       */
+/*   Created: 2022/11/22 21:58:24 by shamsate          #+#    #+#             */
+/*   Updated: 2022/11/22 21:58:27 by shamsate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line.h"
 
 static char	*get_line(char *backup)

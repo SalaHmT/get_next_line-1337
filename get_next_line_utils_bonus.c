@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shamsate <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 21:07:18 by shamsate          #+#    #+#             */
-/*   Updated: 2022/11/22 21:07:19 by shamsate         ###   ########.fr       */
+/*   Created: 2022/11/22 21:58:06 by shamsate          #+#    #+#             */
+/*   Updated: 2022/11/22 21:58:10 by shamsate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 int	ft_index(const char *s, char c)
