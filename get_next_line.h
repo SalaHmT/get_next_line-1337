@@ -19,7 +19,7 @@
 # include <unistd.h>
 
 char			*get_next_line(int fd);
-char			*ft_strjoin(char *s1, char const *s2);
+char			*ft_strjoin_l(char *s1, char const *s2);
 unsigned int	ft_strlen(const char *str);
 int				ft_index(const char *s, char c);
 char			*ft_strdup(const char *s1);

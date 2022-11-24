@@ -59,7 +59,7 @@ char	*ft_strdup(const char *s1)
 	return (ptr);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin_l(char *s1, char const *s2)
 {
 	char	*string;
 	size_t	i;

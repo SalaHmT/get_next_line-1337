@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static char	*get_line(char *backup)
+static char	*get_ln(char *backup)
 {
 	int		len;
 	int		x;
@@ -38,7 +38,7 @@ static char	*get_line(char *backup)
 	return (line);
 }
 
-static char	*get_backup(char *backup)
+static char	*get_bkandsv(char *backup)
 {
 	char	*str;
 	int		start;
@@ -51,21 +51,19 @@ static char	*get_backup(char *backup)
 		start++;
 	if (backup[start] == '\0')
 	{
-		free(backup);
-		return (NULL);
+		return (free(backup),backup = NULL, NULL);
 	}
 	str = malloc(sizeof(char) * (ft_strlen(backup) - start + 1));
 	if (!str)
-		return (NULL);
+		return (free(backup),backup = NULL, NULL);
 	i = 0;
 	while (backup[start])
 		str[i++] = backup[start++];
 	str[i] = '\0';
-	free(backup);
-	return (str);
+	return (free(backup),backup = NULL, str);
 }
 
-static char	*read_line(char *backup, int fd)
+static char	*read_ln(char *backup, int fd)
 {
 	int		byte;
 	char	*buff;
@@ -85,23 +83,23 @@ static char	*read_line(char *backup, int fd)
 			return (NULL);
 		}
 		buff[byte] = '\0';
-		backup = ft_strjoin(backup, buff);
+		backup = ft_strjoin_l(backup, buff);
 	}
 	free(buff);
 	return (backup);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_ln(int fd)
 {
 	static char	*backup[10240];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	backup[fd] = read_line(backup[fd], fd);
+	backup[fd] = read_ln(backup[fd], fd);
 	if (!backup[fd])
 		return (NULL);
-	line = get_line(backup[fd]);
-	backup[fd] = get_backup(backup[fd]);
+	line = get_ln(backup[fd]);
+	backup[fd] = get_bkandsv(backup[fd]);
 	return (line);
 }
