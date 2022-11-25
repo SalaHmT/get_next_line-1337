@@ -17,5 +17,7 @@
 # Debug files
 *.dSYMi/
 
-#files testing
+#Files Testing
 tests
+#Tester Folder
+gnlTester
