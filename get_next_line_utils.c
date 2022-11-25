@@ -9,6 +9,7 @@
 /*   Updated: 2022/11/22 21:57:02 by shamsate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int	ft_index(const char *s, char c)
@@ -80,6 +81,5 @@ char	*ft_strjoin_l(char *s1, char const *s2)
 	while (s2[x])
 		string[i++] = s2[x++];
 	string[i] = 0;
-	free(s1);
-	return (string);
+	return (free(s1), s1 = NULL, string);
 }

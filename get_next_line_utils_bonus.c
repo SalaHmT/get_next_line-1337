@@ -81,5 +81,7 @@ char	*ft_strjoin_l(char *s1, char const *s2)
 	while (s2[x])
 		string[i++] = s2[x++];
 	string[i] = 0;
-	return (free(s1),s1 = NULL, string);
+	free(s1);
+	return (string);
+	return (free(s1), s1 = NULL, string);
 }

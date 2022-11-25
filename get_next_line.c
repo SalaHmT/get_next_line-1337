@@ -50,15 +50,15 @@ static char	*get_bkandsv(char *backup)
 	if (backup[start] == '\n')
 		start++;
 	if (backup[start] == '\0')
-		return (free(backup),backup = NULL, NULL);
+		return (free(backup), backup = NULL, NULL);
 	str = malloc(sizeof(char) * (ft_strlen(backup) - start + 1));
 	if (!str)
-		return (free(backup),backup = NULL, NULL);
+		return (free(backup), backup = NULL, NULL);
 	i = 0;
 	while (backup[start])
 		str[i++] = backup[start++];
 	str[i] = '\0';
-	return (free(backup),backup = NULL, str);
+	return (free(backup), backup = NULL, str);
 }
 
 static char	*read_ln(char *backup, int fd)
@@ -77,12 +77,12 @@ static char	*read_ln(char *backup, int fd)
 			break ;
 		if (byte == -1)
 		{
-			return (free(buff),buff = NULL, NULL);
+			return (free(buff), buff = NULL, NULL);
 		}
 		buff[byte] = '\0';
 		backup = ft_strjoin_l(backup, buff);
 	}
-	return (free(buff),buff = NULL, backup);
+	return (free(buff), buff = NULL, backup);
 }
 
 char	*get_next_line(int fd)
