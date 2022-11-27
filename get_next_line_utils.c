@@ -49,7 +49,7 @@ char	*ft_strdup(const char *s1)
 	size = ft_strlen(s1);
 	ptr = malloc((size + 1) * sizeof(char));
 	if (!ptr)
-		return (NULL);
+		return (free(ptr), ptr = NULL, NULL);
 	i = 0;
 	while (s1[i])
 	{
@@ -62,24 +62,24 @@ char	*ft_strdup(const char *s1)
 
 char	*ft_strjoin_l(char *s1, char const *s2)
 {
-	char	*string;
+	char	*str;
 	size_t	i;
 	size_t	x;
 
 	if (!s1)
 		s1 = ft_strdup("");
-	string = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!string)
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
 		return (NULL);
 	i = 0;
 	while (s1[i])
 	{
-		string[i] = s1[i];
+		str[i] = s1[i];
 		i++;
 	}
 	x = 0;
 	while (s2[x])
-		string[i++] = s2[x++];
-	string[i] = 0;
-	return (free(s1), s1 = NULL, string);
+		str[i++] = s2[x++];
+	str[i] = 0;
+	return (free(s1), s1 = NULL, str);
 }

@@ -6,7 +6,7 @@
 /*   By: shamsate <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:51:01 by shamsate          #+#    #+#             */
-/*   Updated: 2022/11/22 23:12:29 by shamsate         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:31:29 by shamsate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	*get_ln(char *backup)
 {
 	int		len;
-	int		x;
+	int		c;
 	char	*line;
 
 	len = 0;
@@ -28,13 +28,13 @@ static char	*get_ln(char *backup)
 	line = (char *)malloc(sizeof(char) * len + 1);
 	if (!line)
 		return (NULL);
-	x = 0;
-	while (x < len)
+	c = 0;
+	while (c < len)
 	{
-		line[x] = backup[x];
-		x++;
+		line[c] = backup[c];
+		c++;
 	}
-	line[x] = '\0';
+	line[c] = '\0';
 	return (line);
 }
 
@@ -63,23 +63,23 @@ static char	*get_bkandsv(char *backup)
 
 static char	*read_ln(char *backup, int fd)
 {
-	int		byte;
+	int		bloc;
 	char	*buff;
 
 	buff = malloc(BUFFER_SIZE + 1 * sizeof(char));
 	if (!buff)
 		return (NULL);
-	byte = 1;
-	while (byte > 0 && ft_index(backup, '\n') == -1)
+	bloc = 1;
+	while (bloc > 0 && ft_index(backup, '\n') == -1)
 	{
-		byte = read(fd, buff, BUFFER_SIZE);
-		if (byte == 0)
+		bloc = read(fd, buff, BUFFER_SIZE);
+		if (bloc == 0)
 			break ;
-		if (byte == -1)
+		if (bloc == -1)
 		{
 			return (free(buff), buff = NULL, NULL);
 		}
-		buff[byte] = '\0';
+		buff[bloc] = '\0';
 		backup = ft_strjoin_l(backup, buff);
 	}
 	return (free(buff), buff = NULL, backup);
@@ -94,38 +94,38 @@ char	*get_next_line(int fd)
 		return (NULL);
 	backup = read_ln(backup, fd);
 	if (!backup)
-		return (NULL);
+		return (free(backup), backup = NULL, NULL);
 	line = get_ln(backup);
 	backup = get_bkandsv(backup);
 	return (line);
 }
 
-/*int	main(void)
-{
-	char	*line;
-	int		i;
-	int		fd1;
-	int		fd2;
-	int		fd3;
-	fd1 = open("tests/test.txt", O_RDONLY);
-	fd2 = open("tests/test2.txt", O_RDONLY);
-	fd3 = open("tests/test3.txt", O_RDONLY);
-	i = 1;
-	while (i < 7)
-	{
-		line = get_next_line(fd1);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		line = get_next_line(fd2);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		line = get_next_line(fd3);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		i++;
-	}
-	close(fd1);
-	close(fd2);
-	close(fd3);
-	return (0);
-}*/
+// int	main(void)
+// {
+// 	char	*ln;
+// 	int		i;
+// 	int		fd1;
+// 	int		fd2;
+// 	int		fd3;
+// 	fd1 = open("tests/test.txt", O_RDONLY);
+// 	fd2 = open("tests/test2.txt", O_RDONLY);
+// 	fd3 = open("tests/test3.txt", O_RDONLY);
+// 	i = 1;
+// 	while (i < 7)
+// 	{
+// 		ln = get_next_line(fd1);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		ln = get_next_line(fd2);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		ln = get_next_line(fd3);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 	}
+// 	close(fd1);
+// 	close(fd2);
+// 	close(fd3);
+// 	return (0);
+// /

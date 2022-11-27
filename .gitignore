@@ -21,3 +21,5 @@
 tests
 #Tester Folder
 gnlTester
+main.c
+*.txt
