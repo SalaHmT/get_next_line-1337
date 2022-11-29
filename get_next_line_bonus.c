@@ -60,14 +60,14 @@ static char	*get_ln(char *backup)
 	return (line);
 }
 
-static char	*get_bkandsv(char *backup)
+static char	*get_sv_and_fr(char *backup)
 {
 	char	*str;
 	int		start;
 	int		i;
 
 	start = 0;
-	while (backup[start] != '\n'&& backup[start])
+	while (backup[start] != '\n' && backup[start])
 		start++;
 	if (backup[start] == '\n')
 		start++;
@@ -94,35 +94,59 @@ char	*get_next_line(int fd)
 	if (!backup[fd])
 		return (NULL);
 	line = get_ln(backup[fd]);
-	backup[fd] = get_bkandsv(backup[fd]);
+	backup[fd] = get_sv_and_fr(backup[fd]);
 	return (line);
 }
 // int	main(void)
 // {
 // 	char	*ln;
 // 	int		i;
-// 	int		fd1;
+// 	 int		fd1;
 // 	int		fd2;
-// 	int		fd3;
-// 	fd1 = open("tests/test.txt", O_RDONLY);
-// 	fd2 = open("tests/test2.txt", O_RDONLY);
-// 	fd3 = open("tests/test3.txt", O_RDONLY);
+// 	 int		fd3;
+// 	 fd1 = open("text.txt", O_RDONLY);
+// 	fd2 = open("text2.txt", O_RDONLY);
+// 	fd3 = open("text3.txt", O_RDONLY);
 // 	i = 1;
-// 	while (i < 7)
+// 	while (i < 2)
 // 	{
-// 		ln = get_next_line_bonus(fd1);
+// 		ln = get_next_line(fd1);
 // 		printf("line [%02d]: %s", i, ln);
 // 		free(ln);
-// 		ln = get_next_line_bonus(fd2);
+// 		ln = get_next_line(fd2);
 // 		printf("line [%02d]: %s", i, ln);
 // 		free(ln);
-// 		ln = get_next_line_bonus(fd3);
+// 		ln = get_next_line(fd3);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd1);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd2);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd3);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd1);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd2);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd3);
 // 		printf("line [%02d]: %s", i, ln);
 // 		free(ln);
 // 		i++;
 // 	}
-// 	close(fd1);
+// 	 close(fd1);
 // 	close(fd2);
-// 	close(fd3);
+//  close(fd3);
 // 	return (0);
-// /
+// }

@@ -16,6 +16,8 @@
 # endif
 # include <stdlib.h>
 # include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
 
 char			*get_next_line(int fd);
 char			*ft_strjoin_l(char *s1, char const *s2);

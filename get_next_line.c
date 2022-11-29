@@ -12,6 +12,30 @@
 
 #include "get_next_line.h"
 
+static char	*read_ln(char *backup, int fd)
+{
+	int		bloc;
+	char	*buff;
+
+	buff = malloc(BUFFER_SIZE + 1 * sizeof(char));
+	if (!buff)
+		return (NULL);
+	bloc = 1;
+	while (bloc > 0 && ft_index(backup, '\n') == -1)
+	{
+		bloc = read(fd, buff, BUFFER_SIZE);
+		if (bloc == 0)
+			break ;
+		if (bloc == -1)
+		{
+			return (free(buff), buff = NULL, NULL);
+		}
+		buff[bloc] = '\0';
+		backup = ft_strjoin_l(backup, buff);
+	}
+	return (free(buff), buff = NULL, backup);
+}
+
 static char	*get_ln(char *backup)
 {
 	int		len;
@@ -38,7 +62,7 @@ static char	*get_ln(char *backup)
 	return (line);
 }
 
-static char	*get_bkandsv(char *backup)
+static char	*get_sv_and_fr(char *backup)
 {
 	char	*str;
 	int		start;
@@ -61,30 +85,6 @@ static char	*get_bkandsv(char *backup)
 	return (free(backup), backup = NULL, str);
 }
 
-static char	*read_ln(char *backup, int fd)
-{
-	int		bloc;
-	char	*buff;
-
-	buff = malloc(BUFFER_SIZE + 1 * sizeof(char));
-	if (!buff)
-		return (NULL);
-	bloc = 1;
-	while (bloc > 0 && ft_index(backup, '\n') == -1)
-	{
-		bloc = read(fd, buff, BUFFER_SIZE);
-		if (bloc == 0)
-			break ;
-		if (bloc == -1)
-		{
-			return (free(buff), buff = NULL, NULL);
-		}
-		buff[bloc] = '\0';
-		backup = ft_strjoin_l(backup, buff);
-	}
-	return (free(buff), buff = NULL, backup);
-}
-
 char	*get_next_line(int fd)
 {
 	static char	*backup;
@@ -96,7 +96,7 @@ char	*get_next_line(int fd)
 	if (!backup)
 		return (free(backup), backup = NULL, NULL);
 	line = get_ln(backup);
-	backup = get_bkandsv(backup);
+	backup = get_sv_and_fr(backup);
 	return (line);
 }
 
@@ -104,28 +104,52 @@ char	*get_next_line(int fd)
 // {
 // 	char	*ln;
 // 	int		i;
-// 	int		fd1;
+// 	 int		fd1;
 // 	int		fd2;
-// 	int		fd3;
-// 	fd1 = open("tests/test.txt", O_RDONLY);
-// 	fd2 = open("tests/test2.txt", O_RDONLY);
-// 	fd3 = open("tests/test3.txt", O_RDONLY);
+// 	 int		fd3;
+// 	 fd1 = open("text.txt", O_RDONLY);
+// 	fd2 = open("text2.txt", O_RDONLY);
+// 	fd3 = open("text3.txt", O_RDONLY);
 // 	i = 1;
-// 	while (i < 7)
+// 	while (i < 2)
 // 	{
 // 		ln = get_next_line(fd1);
 // 		printf("line [%02d]: %s", i, ln);
 // 		free(ln);
+// 		ln = get_next_line(fd1);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		ln = get_next_line(fd1);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
 // 		ln = get_next_line(fd2);
 // 		printf("line [%02d]: %s", i, ln);
 // 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd2);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd2);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd3);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
+// 		ln = get_next_line(fd3);
+// 		printf("line [%02d]: %s", i, ln);
+// 		free(ln);
+// 		i++;
 // 		ln = get_next_line(fd3);
 // 		printf("line [%02d]: %s", i, ln);
 // 		free(ln);
 // 		i++;
 // 	}
-// 	close(fd1);
+// 	 close(fd1);
 // 	close(fd2);
-// 	close(fd3);
+//  close(fd3);
 // 	return (0);
-// /
+// }
