@@ -2,9 +2,9 @@
     —————————————————————————————————————————————————————————————————————————————————————————————                  
     GET_NEXT_LINE.C          :->                                                                 
     —————————————————————————————————————————————————————————————————————————————————————————————             
-    1 : The function *get_ln : prototype is : static char *get_line(char *backup);
-    2 : The function *get_sv_and_fr : prototype is : static char *get_backup(char *backup);
-    3 : The function *read_ln : prototype is : static char *read_line(char *backup, int fd);
+    1 : The function *get_ln : prototype is : static char *get_ln(char *backup);
+    2 : The function *get_sv_and_fr : prototype is : static char *get_sv_and_fr(char *backup);
+    3 : The function *read_ln : prototype is : static char *read_ln(char *backup, int fd);
     4 : The function *get_next_line : prototype is : char    *get_next_line(int fd);   
     —————————————————————————————————————————————————————————————————————————————————————————————        
     GET_NEXT_LINE_UTILS.C   :->                                                                  
