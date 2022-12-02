@@ -5,148 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shamsate <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 21:58:24 by shamsate          #+#    #+#             */
-/*   Updated: 2022/11/22 21:58:27 by shamsate         ###   ########.fr       */
+/*   Created: 2022/12/02 19:45:08 by shamsate          #+#    #+#             */
+/*   Updated: 2022/12/02 19:45:08 by shamsate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*read_ln(char *backup, int fd)
-{
-	int		bloc;
-	char	*buff;
-
-	buff = malloc(BUFFER_SIZE + 1 * sizeof(char));
-	if (!buff)
-		return (NULL);
-	bloc = 1;
-	while (bloc > 0 && ft_index(backup, '\n') == -1)
-	{
-		bloc = read(fd, buff, BUFFER_SIZE);
-		if (bloc == 0)
-			break ;
-		if (bloc == -1)
-			return (free(buff), buff = NULL, NULL);
-		buff[bloc] = '\0';
-		backup = ft_strjoin_l(backup, buff);
-	}
-	return (free(buff), buff = NULL, backup);
-}
-
-static char	*get_ln(char *backup)
-{
-	int		len;
-	int		c;
-	char	*line;
-
-	len = 0;
-	if (*backup == '\0')
-		return (NULL);
-	while (backup[len] != '\n' && backup[len])
-		len++;
-	if (backup[len] == '\n')
-		len++;
-	line = (char *)malloc(sizeof(char) * len + 1);
-	if (!line)
-		return (NULL);
-	c = 0;
-	while (c < len)
-	{
-		line[c] = backup[c];
-		c++;
-	}
-	line[c] = '\0';
-	return (line);
-}
-
-static char	*get_sv_and_fr(char *backup)
+char	*read_ln(int fd, char *line)
 {
 	char	*str;
-	int		start;
-	int		i;
+	int		count;
 
-	start = 0;
-	while (backup[start] != '\n' && backup[start])
-		start++;
-	if (backup[start] == '\n')
-		start++;
-	if (backup[start] == '\0')
-		return (free(backup), backup = NULL, NULL);
-	str = malloc(sizeof(char) * (ft_strlen(backup) - start + 1));
+	str = malloc(BUFFER_SIZE + 1 * sizeof(char ));
 	if (!str)
-		return (free(backup), backup = NULL, NULL);
-	i = 0;
-	while (backup[start])
-		str[i++] = backup[start++];
-	str[i] = '\0';
-	return (free(backup), backup = NULL, str);
+		return (str);
+	count = 1;
+	while (!ft_strchr(line, '\n') && count != 0)
+	{
+		count = read(fd, str, BUFFER_SIZE);
+		if (count == -1)
+			return (free(str), free(line), NULL);
+		str[count] = '\0';
+		line = ft_strjoin_l(line, str);
+	}
+	return (free(str), line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*backup[10240];
-	char		*line;
+	static char	*line[10240];
+	char		*final;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd == 1 || fd == 2 || BUFFER_SIZE <= 0)
 		return (NULL);
-	backup[fd] = read_ln(backup[fd], fd);
-	if (!backup[fd])
-		return (NULL);
-	line = get_ln(backup[fd]);
-	backup[fd] = get_sv_and_fr(backup[fd]);
-	return (line);
+	line[fd] = read_ln(fd, line[fd]);
+	if (!line[fd])
+		return (line[fd]);
+	final = get_ln(line[fd]);
+	line[fd] = get_sv_and_fr(line[fd]);
+	return (final);
 }
-// int	main(void)
-// {
-// 	char	*ln;
-// 	int		i;
-// 	 int		fd1;
-// 	int		fd2;
-// 	 int		fd3;
-// 	 fd1 = open("text.txt", O_RDONLY);
-// 	fd2 = open("text2.txt", O_RDONLY);
-// 	fd3 = open("text3.txt", O_RDONLY);
-// 	i = 1;
-// 	while (i < 2)
-// 	{
-// 		ln = get_next_line(fd1);
-// 		printf("line [%02d]: %s", i, ln);
-// 		free(ln);
-// 		ln = get_next_line(fd2);
-// 		printf("line [%02d]: %s", i, ln);
-// 		free(ln);
-// 		ln = get_next_line(fd3);
-// 		printf("line [%02d]: %s", i, ln);
-// 		free(ln);
-// 		i++;
-// 		ln = get_next_line(fd1);
-// 		printf("line [%02d]: %s", i, ln);
-// 		free(ln);
-// 		i++;
-// 		ln = get_next_line(fd2);
-// 		printf("line [%02d]: %s", i, ln);
-// 		free(ln);
-// 		i++;
-// 		ln = get_next_line(fd3);
-// 		printf("line [%02d]: %s", i, ln);
-// 		free(ln);
-// 		i++;
-// 		ln = get_next_line(fd1);
-// 		printf("line [%02d]: %s", i, ln);
-// 		free(ln);
-// 		i++;
-// 		ln = get_next_line(fd2);
-// 		printf("line [%02d]: %s", i, ln);
-// 		free(ln);
-// 		i++;
-// 		ln = get_next_line(fd3);
-// 		printf("line [%02d]: %s", i, ln);
-// 		free(ln);
-// 		i++;
-// 	}
-// 	 close(fd1);
-// 	close(fd2);
-//  close(fd3);
-// 	return (0);
-// }
