@@ -2,16 +2,18 @@
     —————————————————————————————————————————————————————————————————————————————————————————————                  
     GET_NEXT_LINE.C          :->                                                                 
     —————————————————————————————————————————————————————————————————————————————————————————————             
-    1 : The function *get_ln : prototype is : static char *get_ln(char *backup);
-    2 : The function *get_sv_and_fr : prototype is : static char *get_sv_and_fr(char *backup);
-    3 : The function *read_ln : prototype is : static char *read_ln(char *backup, int fd);
+    1 : The function *get_ln : prototype is :  char *get_ln(char *backup);
+    2 : The function *get_sv_and_fr : prototype is :  char *get_sv_and_fr(char *backup);
+    3 : The function *read_ln : prototype is :  char *read_ln(char *backup, int fd);
     4 : The function *get_next_line : prototype is : char    *get_next_line(int fd);   
     —————————————————————————————————————————————————————————————————————————————————————————————        
     GET_NEXT_LINE_UTILS.C   :->                                                                  
     ———————————————————————————————————————————————————————————————------------------------------
-    1 : The function ft_index : prototype is : char	*ft_strchr(char *s, int c);              
-    2 : The function ft_strlen : prototype is : int    ft_strlen(const char *str);                    
-    3 : The function *ft_strjoin_l : prototype is : char    *ft_strjoin_l(char *s1, char  *s2); 
+    1 : The function *get_ln : prototype is :  char *get_ln(char *backup);
+    2 : The function *get_sv_and_fr : prototype is :  char *get_sv_and_fr(char *backup);
+    3: The function ft_index : prototype is : char	*ft_strchr(char *s, int c);              
+    4 : The function ft_strlen : prototype is : int    ft_strlen(const char *str);                    
+    5 : The function *ft_strjoin_l : prototype is : char    *ft_strjoin_l(char *s1, char  *s2); 
     ——————————————————————————————————————————————————————————-----------------------------------             
     GET_NEXT_LINE_BONUS.C    :->                                                                  
     ——————————————————————————————————————————————————————————-----------------------------------                 
