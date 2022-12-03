@@ -12,7 +12,7 @@
     1 : The function *get_ln : prototype is :  char *get_ln(char *backup);
     2 : The function *get_sv_and_fr : prototype is :  char *get_sv_and_fr(char *backup);
     3: The function ft_index : prototype is : char	*ft_strchr(char *s, int c);              
-    4 : The function ft_strlen : prototype is : int    ft_strlen(const char *str);                    
+    4 : The function ft_strlen : prototype is : int    ft_strlen(const char *s);                    
     5 : The function *ft_strjoin_l : prototype is : char    *ft_strjoin_l(char *s1, char  *s2); 
     ——————————————————————————————————————————————————————————-----------------------------------             
     GET_NEXT_LINE_BONUS.C    :->                                                                  
