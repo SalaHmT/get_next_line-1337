@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(char *s)
 {
@@ -54,66 +54,66 @@ char	*ft_strjoin_l(char *s1, char *s2)
 		return (s2);
 	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1 * sizeof(char));
 	if (!str)
-		return (str);
+		return (free(str), str = NULL, str);
 	i = -1;
-	while (*(s1 + (++i)))
-		*(str + i) = *(s1 + i);
+	while (s1[++i])
+		str[i] = s1[i];
 	j = -1;
-	while (*(s2 + (++j)))
-		*(str + i + j) = *(s2 + j);
-	*(str + i + j) = '\0';
+	while (s2[++j])
+		str [i + j] = s2[j];
+	str [i + j] = '\0';
 	return (free(s1), str);
 }
 
-char	*get_ln(char *line)
+char	*get_ln(char *backup)
 {
 	char	*str;
 	int		i;
 
 	i = 0;
-	if (*line == 0)
+	if (*backup == 0)
 		return (NULL);
-	while (*(line + i) && *(line + i) != '\n')
+	while (backup[i] && backup[i] != '\n')
 		i++;
-	if (*(line + i) == '\n')
+	if (backup[i] == '\n')
 		i++;
 	str = (char *)malloc(i + 1 * sizeof(char));
 	if (!str)
 		return (str);
 	i = 0;
-	while (*(line + i) && *(line + i) != '\n')
+	while (backup[i] && backup[i] != '\n')
 	{
-		str[i] = *(line + i);
+		str[i] = backup[i];
 		i++;
 	}
-	if (*(line + i) == '\n')
+	if (backup[i] == '\n')
 		str[i++] = '\n';
 	str[i] = '\0';
 	return (str);
 }
 
-char	*get_sv_and_fr(char *line)
+char	*get_sv_and_fr(char *backup)
 {
 	char	*str;
 	int		j;
 	int		i;
 
 	i = 0;
-	while (*(line + i) && *(line + i) != '\n')
+	while (backup[i] && backup[i] != '\n')
 		i++;
-	if (*(line + i) == '\0')
-		return (free(line), NULL);
-	str = (char *)malloc((ft_strlen(line) - i + 1) * sizeof(char));
+	if (backup[i] == '\0')
+		return (free(backup), NULL);
+	str = (char *)malloc((ft_strlen(backup) - i + 1) * sizeof(char));
 	if (!str)
 		return (str);
 	i++;
 	j = 0;
-	while (*(line + i))
+	while (backup[i])
 	{
-		str[j] = *(line + i);
+		str[j] = backup[i];
 		i++;
 		j++;
 	}
 	str[j] = '\0';
-	return (free(line), str);
+	return (free(backup), str);
 }
